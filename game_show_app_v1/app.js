@@ -1,10 +1,6 @@
 const qwerty = document.querySelector('#qwerty');
 const startButton = document.querySelector('.btn__reset');
-const phrase = [{}]
-
-//return a radom phrase 
-
-const getRandomPhraseAsArrray = arr => [
+const phrase = [
     { question:'Who is Haunting Adeline?',
         answer: 'Zade'
     },
@@ -46,9 +42,23 @@ const getRandomPhraseAsArrray = arr => [
     },
 ];
 
+//array random phrase
+function getRandomPhraseAsArrray(arr) {
+    const question = document.querySelector('.question');
+    const getRandomNumber = Math.ceil(math.random() * 10);
+    const randomArray = arr[getRandomNumber];
+    const getRandomQuestion = randomArray.question;
+    const getRandomAnswer = randomArray.answer;
+
+    return getRandomAnswer;
+};
+
 //add letters of string to the display
 
-const addPhraseToDisplay = arr => {}
+function addPhraseToDisplay(arr) {
+    const phraseUl = document.querySelector('#phrase ul');
+    const randomArray = getRandomPhraseAsArrray(arr);
+}
 
 //check if a letter is in the phrase
 
