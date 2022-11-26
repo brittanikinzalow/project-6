@@ -10,7 +10,7 @@ function stub() {};
 let missed = 0;
 
 
-let phrases = [
+const phrases = [
     'merry christmas and happy new year',
     'have a blessed day',
     'catch me if you can',
@@ -20,13 +20,13 @@ let phrases = [
 
 
 
-let getRandomPhraseAsArray = arr => {
-    arr [Math.floor(Math.random() * phrases.length)];
+
+const getRandomPhraseAsArray = arr => {
+    return phrases[Math.floor(Math.random() * phrases.length)];
+  
 };
 
-
-let selectedPhrase = phrases[Math.floor(Math.random() * phrases.length)];
-
+const randomPhrase = getRandomPhraseAsArray(phrases);
 
 
 
@@ -35,7 +35,18 @@ let selectedPhrase = phrases[Math.floor(Math.random() * phrases.length)];
 
 
 
-const addPhraseToDisplay = arr => {
+
+
+
+
+
+
+
+
+
+
+
+const addPhraseToDisplay = () => {
 
 }
 
