@@ -7,10 +7,10 @@ const phrase = document.querySelector('phrase');
 function stub() {};
 
 
-let missed = 0;
+ let missed = 0;
 
 
-const phrases = [
+var myPhrases = [
     'merry christmas and happy new year',
     'have a blessed day',
     'catch me if you can',
@@ -19,36 +19,36 @@ const phrases = [
 ];
 
 
-
+//math.floor to return a random phrase to the DOM check by console.log(result) to see the random phrase
 
 const getRandomPhraseAsArray = arr => {
-    return phrases[Math.floor(Math.random() * phrases.length)];
-  
+    var myPhrases = [Math.floor(Math.random()*arr.length)];
+    const item = arr[myPhrases];
+    return item;
 };
 
-const randomPhrase = getRandomPhraseAsArray(phrases);
+const result = getRandomPhraseAsArray(myPhrases);
 
 
 
+//adding the phrases to the display with a for loop 
 
+    const addPhraseToDisplay = arr => {
+        for (let i = 0; i < arr.length; i++) {
+            let li = document.createElement('li');
+            li.textContent = arr[i];
+            ul.appendChild(li);
+            if (arr[i] === " ") {
+                li.className = 'space';
+            } else {
+                li.className = 'letter';
+            }
+        }
+    }
+        
+const randomPhrases = getRandomPhraseAsArray(myPhrases);
+// addPhraseToDisplay(result);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-const addPhraseToDisplay = () => {
-
-}
 
 //event listener for start game//
 
