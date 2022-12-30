@@ -1,8 +1,8 @@
 const qwerty = document.querySelector('#qwerty');
 const startButton = document.querySelector('.btn__reset');
 const phrase = document.querySelector('phrase');
-
-
+const ul = document.querySelector('#phrase ul');
+let heartLives = document.querySelectorAll('img');
 
 function stub() {};
 
@@ -46,8 +46,61 @@ const result = getRandomPhraseAsArray(myPhrases);
         }
     }
         
-const randomPhrases = getRandomPhraseAsArray(myPhrases);
-// addPhraseToDisplay(result);
+addPhraseToDisplay(result);
+
+//check if the letter is in the phrase
+
+const checkLetter = button => {
+    let keyboard = document.getElementsByClassName('keyboard');
+    let key = null;
+    for (let i = 0; i < keyboard.length; i++) {
+        if(keyboard[i].toLowerCase() === button){
+            keyboard[i].classList.add('show');
+            key = button;
+        }
+    }
+    return key;
+}
+
+
+//qwerty event listener for keyboard
+
+qwerty.addEventListener('click', (event) => {
+    const chosenButton = event.target;
+    if(chosenButton.tagName === 'button' && chosenButton.className !== 'chosen'){
+        chosenButton.className = 'chosen';
+        let correctLetter = checkLetter(chosenButton);
+        if (correctLetter === null){
+            heartLives[missed].src = 'images/lostHeart.png';
+            missed++;
+    }
+  } return checkWin();
+});
+
+
+//check win
+
+const checkWin = () => {
+    let letter = document.getElementsByClassName('letter');
+    let show = document.getElementsByClassName('show');
+    const results = document.getElementsByClassName('title');
+    if(letter.length === show.length){
+        results.textContent = 'WINNER!';
+        overlay.classList.add('win');
+        overlay.style.display = 'flex';
+    } else if (missed < 4){
+        results.textContent = 'LOSER!';
+        overlay.classList.add('lose');
+        overlay.style.display = 'flex';
+    }
+}
+
+
+
+
+
+
+
 
 
 //event listener for start game//
