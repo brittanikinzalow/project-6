@@ -2,13 +2,8 @@ const qwerty = document.querySelector('#qwerty');
 const startButton = document.querySelector('.btn__reset');
 const phrase = document.querySelector('phrase');
 const ul = document.querySelector('#phrase ul');
-let heartLives = document.querySelectorAll('img');
-
-function stub() {};
-
-
- let missed = 0;
-
+let missed = 0;
+const overLay = document.querySelector("#overlay");
 
 var myPhrases = [
     'merry christmas and happy new year',
@@ -37,69 +32,69 @@ const result = getRandomPhraseAsArray(myPhrases);
         for (let i = 0; i < arr.length; i++) {
             let li = document.createElement('li');
             li.textContent = arr[i];
-            ul.appendChild(li);
             if (arr[i] === " ") {
                 li.className = 'space';
             } else {
                 li.className = 'letter';
             }
+            ul.appendChild(li);
         }
-    }
+    };
         
 addPhraseToDisplay(result);
 
-//check if the letter is in the phrase
+// //check if the letter is in the phrase
 
-const checkLetter = button => {
-    let keyboard = document.getElementsByClassName('keyboard');
-    let key = null;
-    for (let i = 0; i < keyboard.length; i++) {
-        if(keyboard[i].toLowerCase() === button){
-            keyboard[i].classList.add('show');
-            key = button;
+const checkLetter = arr => {
+    let letter = document.getElementsByClassName('li');
+    let letterMatch = null;
+    for (let i = 0; i < letter.length; i++) {
+        if(letter[i].textContent.toLowerCase() === button.textContent){
+            letter[i].className.add('show');
+            letterMatch = letter[i].textContent;
         }
     }
-    return key;
-}
+    return letterMatch;
+};
+
+
 
 
 //qwerty event listener for keyboard
 
-qwerty.addEventListener('click', (event) => {
-    const chosenButton = event.target;
-    if(chosenButton.tagName === 'button' && chosenButton.className !== 'chosen'){
-        chosenButton.className = 'chosen';
-        let correctLetter = checkLetter(chosenButton);
-        if (correctLetter === null){
-            heartLives[missed].src = 'images/lostHeart.png';
-            missed++;
-    }
-  } return checkWin();
-});
+qwerty.addEventListener('click', (e) => {
+
+        if( e.target.tagName === 'BUTTON' && e.target.className !== 'chosen' ) {
+          const phraseLetter = checkLetter(e.target);
+          e.target.className += 'chosen';
+          if( phraseLetter === null ) {
+            
+            let tries = document.getElementsByClassName('tries')[missed];
+            missed += 1;
+            tries.innerHTML = '<img src=images/lostHeart.png height="35px" width="30px">';
+          }
+        }
+        checkWin();
+      });
 
 
 //check win
 
 const checkWin = () => {
+   
     let letter = document.getElementsByClassName('letter');
     let show = document.getElementsByClassName('show');
-    const results = document.getElementsByClassName('title');
+    const title = document.getElementsByClassName('#overlay');
     if(letter.length === show.length){
-        results.textContent = 'WINNER!';
-        overlay.classList.add('win');
+        title.innerText = "YOU WON"
+        overlay.className = 'win';
         overlay.style.display = 'flex';
-    } else if (missed < 4){
-        results.textContent = 'LOSER!';
-        overlay.classList.add('lose');
+    } else if (missed > 4){
+        title.innerText = 'LOSER!';
+        overlay.className = 'lose';
         overlay.style.display = 'flex';
     }
-}
-
-
-
-
-
-
+};
 
 
 
@@ -107,4 +102,5 @@ const checkWin = () => {
 
 startButton.addEventListener('click', () => {
     overlay.style.display = 'none';
-});
+
+    });
